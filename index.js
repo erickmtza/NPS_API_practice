@@ -25,10 +25,10 @@ function formatQueryParams(params) {
     return queryItems.join('&');
 }
 
-function getStateParks(searchedState, maxResults = 10) {
+function getStateParks(searchedStates, maxResults = 10) {
     const params = {
         api_key: "1qnP25UZu97VqOeb0KIzMWxGUaWgVMsbgM8WFYMY",
-        stateCode: [searchedState],
+        stateCode: searchedStates,
         limit: maxResults,
         fields: "addresses"
     }
@@ -62,9 +62,16 @@ $(function searchFetch() {
     $('form').submit( event => {
         event.preventDefault();
 
-        const searchedState = $('#united-states').val();
+        const firstState = $('#united-states-1').val();
+        const secondState = $('#united-states-2').val();
+        const thirdState = $('#united-states-3').val();
+
+        const states = [firstState, secondState, thirdState];
+
+        console.log(states);
+
         const maxResults = $('#js-max-results').val();
 
-        getStateParks(searchedState, maxResults);
+        getStateParks(states, maxResults);
     })
 })
